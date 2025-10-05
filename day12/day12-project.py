@@ -8,6 +8,10 @@ A game where the player tries to guess a random number between 1 and 100.
 import random
 
 
+EASY_LEVEL_ATTEMPTS = 10
+HARD_LEVEL_ATTEMPTS = 5
+
+
 def get_difficulty():
     """Get difficulty level from user with validation."""
     while True:
@@ -19,7 +23,7 @@ def get_difficulty():
 
 def get_attempts(difficulty):
     """Return number of attempts based on difficulty level."""
-    return 10 if difficulty == 'easy' else 5
+    return EASY_LEVEL_ATTEMPTS if difficulty == 'easy' else HARD_LEVEL_ATTEMPTS
 
 
 def get_user_guess():
