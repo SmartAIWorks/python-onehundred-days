@@ -1,0 +1,6 @@
+{
+    "python.languageServer": "Pylance",
+    "python.analysis.useLibraryCodeForTypes": true,
+    "python.analysis.typeCheckingMode": "basic",
+    "editor.hover.enabled": true
+}
