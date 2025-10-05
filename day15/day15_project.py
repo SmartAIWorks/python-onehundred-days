@@ -43,21 +43,12 @@ def insert_coins():
                 return None
 
 def validate_resources(product):
-    water = resources["water"]
-    milk = resources["milk"]
-    coffee = resources["coffee"]
-
-    product_water = product.get("ingredients", {}).get("water", 0)
-    product_milk = product.get("ingredients", {}).get("milk", 0)
-    product_coffee = product.get("ingredients", {}).get("coffee", 0)
-
+    product_ingredients = product.get("ingredients");
     missing = []
-    if water < product_water:
-        missing.append("water")
-    if milk < product_milk:
-        missing.append("milk")
-    if coffee < product_coffee:
-        missing.append("coffee")
+    
+    for item in product_ingredients:
+        if resources[item] < product_ingredients[item]:
+            missing.append(item);
 
     if missing:
         print(f"Sorry, there is not enough: {', '.join(missing)}.")
