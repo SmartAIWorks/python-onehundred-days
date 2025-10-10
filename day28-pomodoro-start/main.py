@@ -5,33 +5,41 @@ RED = "#e7305b"
 GREEN = "#9bdeac"
 YELLOW = "#f7f5dd"
 FONT_NAME = "Courier"
-# WORK_MIN = 25
-# SHORT_BREAK_MIN = 5
-# LONG_BREAK_MIN = 20
 
-WORK_MIN = .1
-SHORT_BREAK_MIN = .1
-LONG_BREAK_MIN = .1
+WORK_MIN = 25
+SHORT_BREAK_MIN = 5
+LONG_BREAK_MIN = 20
+
+# WORK_MIN = .1
+# SHORT_BREAK_MIN = .1
+# LONG_BREAK_MIN = .1
 
 reps = 0
-timer: str = ''
+timer = None
 
 from tkinter import *
 
 # ---------------------------- TIMER RESET ------------------------------- # 
 
 def reset_timer():
-    window.after_cancel(timer)
+    global timer, reps
+    if timer:
+        try:
+            window.after_cancel(timer)
+        except Exception:
+            pass
+        finally:
+            timer = None
     header_label.config(text='Timer', fg=GREEN)
     canvas.itemconfig(canvas_text, text = f"00:00")
     check_marks.config(text='' )
-
-    global reps
     reps = 0
 # ---------------------------- TIMER MECHANISM ------------------------------- # 
 
 def start_timer():
-    global reps
+    global reps, timer
+    if timer is not None:
+        return
     reps += 1
 
     work_secs = WORK_MIN * 60
@@ -53,16 +61,17 @@ def start_timer():
 
 
 def count_down(count):
-    count_min = int(count // 60)
-    count_sec = int(count % 60)
+    global timer
+    remaining = int(count)
+    count_min = remaining // 60
+    count_sec = remaining % 60
 
     canvas.itemconfig(canvas_text, text = f"{count_min:02d}:{count_sec:02d}")
 
-    if count > 0:
-        global timer
-        timer = window.after(1000, count_down, count - 1)
-
+    if remaining > 0:
+        timer = window.after(1000, count_down, remaining - 1)
     else:
+        timer = None
         start_timer()
         work_completed = reps // 2
         check_marks.config(text='✔' * work_completed)
