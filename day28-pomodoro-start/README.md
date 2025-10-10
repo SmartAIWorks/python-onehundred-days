@@ -1,0 +1,1 @@
+pyinstaller --onefile --windowed main.py --add-data "tomato.png;." --name Pomodoro

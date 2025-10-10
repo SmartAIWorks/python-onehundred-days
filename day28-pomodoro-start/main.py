@@ -18,6 +18,7 @@ reps = 0
 timer = None
 
 from tkinter import *
+from path_util import resource_path
 
 # ---------------------------- TIMER RESET ------------------------------- # 
 
@@ -82,7 +83,7 @@ window = Tk()
 window.title('Pomodoro')
 window.config(padx=100, pady=100, bg=YELLOW)
 
-tomato_img = PhotoImage(file="tomato.png")
+tomato_img = PhotoImage(file=resource_path("tomato.png"))
 
 # Initialize canvas
 canvas = Canvas(width=200, height=224, bg=YELLOW, highlightthickness=0)
