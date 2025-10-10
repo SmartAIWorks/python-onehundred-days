@@ -82,8 +82,8 @@ window = Tk()
 
 window.title('Pomodoro')
 window.config(padx=100, pady=100, bg=YELLOW)
-
-tomato_img = PhotoImage(file=resource_path("tomato.png"))
+window.iconbitmap(resource_path('images/rmalabs-below.ico'))
+tomato_img = PhotoImage(file=resource_path("images/tomato.png"))
 
 # Initialize canvas
 canvas = Canvas(width=200, height=224, bg=YELLOW, highlightthickness=0)
@@ -97,12 +97,44 @@ header_label = Label(text="Timer", font=('Times New Roman', 30, 'bold'), fg=GREE
 header_label.grid(row=0, column=1)
 
 # Start button
-btn_start = Button(text='Start', command=start_timer)
+#btn_start = Button(text='Start', command=start_timer)
+def on_enter(e):
+    e.widget['background'] = '#007B83'
+
+def on_leave(e):
+    e.widget['background'] = '#00ADB5'
+
+btn_start = Button(
+    text="Start",
+    command=start_timer,
+    font=("Poppins", 12, "bold"),
+    bg="#00ADB5",
+    fg="white",
+    relief="flat",
+    padx=25,
+    pady=12
+)
+btn_start.bind("<Enter>", on_enter)
+btn_start.bind("<Leave>", on_leave)
+
 btn_start.grid(row=2, column=0)
 
 
 # Reset button
-btn_reset = Button(text='Reset', command=reset_timer)
+#btn_reset = Button(text='Reset', command=reset_timer)
+
+btn_reset = Button(
+    text="Reset",
+    command=reset_timer,
+    font=("Poppins", 12, "bold"),
+    bg="#8fbc8f",
+    fg="white",
+    relief="flat",
+    padx=25,
+    pady=12
+)
+btn_reset.bind("<Enter>", on_enter)
+btn_reset.bind("<Leave>", on_leave)
 btn_reset.grid(row=2, column=2)
 
 
