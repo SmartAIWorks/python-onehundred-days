@@ -2,6 +2,7 @@ from bs4 import BeautifulSoup
 
 import requests
 
+
 def main():
     # with open('website.html') as file:
     #     content = file.read()
